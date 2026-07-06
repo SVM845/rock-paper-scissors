@@ -5,8 +5,8 @@
 //    IF number is from 9 to 12 return => scissors 
 //write a function to get the human choice
 //  USE prompt and store it in a variable
-//write playRound function such that it gets the two parameter's from previous funcs, plays the game and shows the winner with a string
-//
+//write playRound function such that it gets the two parameter's from previous funcs, plays the game and shows the winner with a string value
+//   
 
 let option1 = "rock";
 let option2 = "paper";
@@ -30,8 +30,31 @@ function getHumanChoice() {
 }
 
 function playRound(humanChoice, computerChoice) {
+    console.log("Human choice: ", humanChoice);
+    console.log("Computer choice: ", computerChoice);
 
+    if (humanChoice == computerChoice) { return "Draw!" }
+    else if (humanChoice == option1 && computerChoice == option2) {
+        computerScore = computerScore + 1;
+        return "Computer Won!";
+    } else if (humanChoice == option2 && computerChoice == option1) {
+        humanScore = humanScore + 1;
+        return "Human Won!";
+    } else if (humanChoice == option1 && computerChoice == option3) {
+        humanScore = humanScore + 1;
+        return "Human Won!";
+    } else if (humanChoice == option3 && computerChoice == option1) {
+        computerScore = computerScore + 1;
+        return "Computer Won!";
+    } else if (humanChoice == option2 && computerChoice == option3) {
+        computerScore = computerScore + 1;
+        return "Computer Won!";
+    } else if (humanChoice == option3 && computerChoice == option2) {
+        humanScore = humanScore + 1;
+        return "Human Won!";
+    }
 }
 
-console.log(getHumanChoice());
-console.log(getComputerChoice());
+const hc = getHumanChoice();
+const cc = getComputerChoice();
+console.log(playRound(hc, cc));
