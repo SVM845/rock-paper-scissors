@@ -5,5 +5,7 @@
 //    IF number is from 9 to 12 return => scissors  
 
 function getComputerChoice () {
-    
+    let number = (Math.floor(Math.random() *10) + 3);
+    return number; 
 }
+console.log(getComputerChoice());
