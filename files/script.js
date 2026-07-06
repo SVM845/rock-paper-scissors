@@ -5,6 +5,8 @@
 //    IF number is from 9 to 12 return => scissors 
 //write a function to get the human choice
 //  USE prompt and store it in a variable
+//write playRound function such that it gets the two parameter's from previous funcs, plays the game and shows the winner with a string
+//
 
 let option1 = "rock";
 let option2 = "paper";
@@ -14,7 +16,6 @@ let computerScore = 0;
 
 function getComputerChoice() {
     let number = (Math.floor(Math.random() * 10) + 3);
-    console.log(number);
     if (number == 1 || number == 2 || number == 3 || number == 4) { return option1 }
     else if (number == 5 || number == 6 || number == 7 || number == 8) { return option2 }
     else if (number == 9 || number == 10 || number == 11 || number == 12) { return option3 }
@@ -22,9 +23,15 @@ function getComputerChoice() {
 
 function getHumanChoice() {
     let choice = prompt("ROCK? PAPER? SCISSORS?");
+    choice = choice.toLowerCase();
     if (choice == "rock") { return option1 }
     else if (choice == "paper") { return option2 }
     else if (choice == "scissors") { return option3 }
 }
 
+function playRound(humanChoice, computerChoice) {
+
+}
+
 console.log(getHumanChoice());
+console.log(getComputerChoice());
