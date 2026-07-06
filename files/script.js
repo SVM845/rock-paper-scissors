@@ -33,25 +33,25 @@ function playRound(humanChoice, computerChoice) {
     console.log("Human choice: ", humanChoice);
     console.log("Computer choice: ", computerChoice);
 
-    if (humanChoice == computerChoice) { return "Draw!" }
+    if (humanChoice == computerChoice) { return "Draw! " }
     else if (humanChoice == option1 && computerChoice == option2) {
         computerScore = computerScore + 1;
-        return "Computer Won!";
+        return "Computer Won! Paper Beats Rock";
     } else if (humanChoice == option2 && computerChoice == option1) {
         humanScore = humanScore + 1;
-        return "Human Won!";
+        return "Human Won! Paper Beats Rock";
     } else if (humanChoice == option1 && computerChoice == option3) {
         humanScore = humanScore + 1;
-        return "Human Won!";
+        return "Human Won! Rock Beats Scissors";
     } else if (humanChoice == option3 && computerChoice == option1) {
         computerScore = computerScore + 1;
-        return "Computer Won!";
+        return "Computer Won! Rock Beats Scissors";
     } else if (humanChoice == option2 && computerChoice == option3) {
         computerScore = computerScore + 1;
-        return "Computer Won!";
+        return "Computer Won! Scissor Beats Paper";
     } else if (humanChoice == option3 && computerChoice == option2) {
         humanScore = humanScore + 1;
-        return "Human Won!";
+        return "Human Won! Scissor Beats Paper";
     }
 }
 
