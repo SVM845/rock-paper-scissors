@@ -9,6 +9,8 @@
 let option1 = "rock";
 let option2 = "paper";
 let option3 = "scissors";
+let humanScore = 0;
+let computerScore = 0;
 
 function getComputerChoice() {
     let number = (Math.floor(Math.random() * 10) + 3);
