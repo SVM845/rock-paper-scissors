@@ -55,6 +55,11 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-const hc = getHumanChoice();
-const cc = getComputerChoice();
-console.log(playRound(hc, cc));
+function playGame() {
+    for (let i = 1; i <= 5; i++) {
+        const hc = getHumanChoice();
+        const cc = getComputerChoice();
+        console.log(playRound(hc, cc));
+    }
+}
+playGame();
