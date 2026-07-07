@@ -59,7 +59,15 @@ function playGame() {
     for (let i = 1; i <= 5; i++) {
         const hc = getHumanChoice();
         const cc = getComputerChoice();
+        console.log("\n Round ", i);
         console.log(playRound(hc, cc));
     }
+    getWinner(humanScore, computerScore);
+}
+function getWinner(humanScore, computerScore) {
+    console.log("Human Score: " + humanScore + " | " + "Computer Score: " + computerScore);
+    if (humanScore > computerScore) { console.log("Human Won The Game, Score:  " + humanScore) }
+    else if (computerScore > humanScore) { console.log("Computer Won The Game, Score: " + computerScore) }
+    else { console.log("Game Is A Draw!") }
 }
 playGame();
