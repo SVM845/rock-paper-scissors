@@ -12,8 +12,10 @@
 const btn1 = document.createElement('button');
 const btn2 = document.createElement('button');
 const btn3 = document.createElement('button');
+const btn4 = document.createElement('button');
 const main = document.querySelector("#main");
-const buttons = [btn1, btn2, btn3];
+
+const buttons = [btn1, btn2, btn3, btn4];
 const buttonContainer = document.createElement("div");
 const resultContainer = document.createElement('div');
 const p1 = document.createElement('p');
@@ -29,12 +31,12 @@ let computerScore = 0;
 buttonContainer.appendChild(btn1);
 buttonContainer.appendChild(btn2);
 buttonContainer.appendChild(btn3);
-btn1.textContent = "Rock";
-btn2.textContent = "Paper";
-btn3.textContent = "Scissors";
+btn1.textContent = "🪨";
+btn2.textContent = "📃";
+btn3.textContent = "✂️";
+btn4.textContent = "Restart";
 buttonContainer.classList.add('buttonContainer');
 resultContainer.classList.add('resultContainer');
-// resultContainer.appendChild()
 main.appendChild(resultContainer);
 main.appendChild(buttonContainer);
 
@@ -42,7 +44,6 @@ main.appendChild(buttonContainer);
 
 buttons.forEach(button => {
     button.classList.add("button")
-
     button.addEventListener("click", (e) => {
         switch (e.currentTarget) {
             case btn1:
@@ -58,6 +59,14 @@ buttons.forEach(button => {
 
     })
 })
+btn4.addEventListener("click", (e) =>{
+    humanScore = 0;
+    computerScore = 0;
+    playGame();
+    main.removeChild(btn4);
+    main.appendChild(buttonContainer);
+    p3.textContent = "";
+})
 
 
 
@@ -68,15 +77,10 @@ function getComputerChoice() {
     else if (number == 9 || number == 10 || number == 11 || number == 12) { return option3 }
 }
 
-function getHumanChoice() {
-    let choice = prompt("ROCK? PAPER? SCISSORS?");
-    choice = choice.toLowerCase();
-    if (choice == "rock") { return option1 }
-    else if (choice == "paper") { return option2 }
-    else if (choice == "scissors") { return option3 }
-}
-
 function playRound(humanChoice, computerChoice) {
+
+
+
     if (humanChoice == computerChoice) { p2.textContent = "Draw! " }
     else if (humanChoice == option1 && computerChoice == option2) {
         computerScore += 1;
@@ -104,24 +108,25 @@ function playRound(humanChoice, computerChoice) {
     resultContainer.appendChild(p2);
     resultContainer.appendChild(p3);
     getWinner(humanScore, computerScore);
-
-
 }
-
 
 function playGame() {
     getWinner(humanScore, computerScore);
 }
-
 function getWinner(HS, CS) {
     if (HS == 5) {
         resultContainer.removeChild(p1);
         resultContainer.removeChild(p2);
-        p3.textContent = "Human Won The Game";
+        p3.textContent = "Human Won The Game"; 
+        main.removeChild(buttonContainer);
+        main.appendChild(btn4);
     }
     else if (CS == 5) {
         resultContainer.removeChild(p1);
         resultContainer.removeChild(p2);
+        p3.textContent = "Computer Won The Game";
+        main.removeChild(buttonContainer);
+        main.appendChild(btn4);
     }
 }
 
