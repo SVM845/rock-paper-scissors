@@ -3,10 +3,12 @@
 }
 #main {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 100px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: rgb(0, 204, 255);
 }
 
 .button {
@@ -14,4 +16,19 @@
   width: 200px;
   height: 100px;
   font-size: 50px;
+
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 100px;
+}
+.resultContainer {
+  width: 700px;
+  height: 400px;
+  border: 10px solid red;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

@@ -13,22 +13,52 @@ const btn1 = document.createElement('button');
 const btn2 = document.createElement('button');
 const btn3 = document.createElement('button');
 const main = document.querySelector("#main");
-const buttons = [btn1,btn2,btn3];
+const buttons = [btn1, btn2, btn3];
+const buttonContainer = document.createElement("div");
+const resultContainer = document.createElement('div');
+const p1 = document.createElement('p');
+const p2 = document.createElement('p');
+const p3 = document.createElement('p');
+const p4 = document.createElement('p');
+
 let option1 = "rock";
 let option2 = "paper";
 let option3 = "scissors";
 let humanScore = 0;
 let computerScore = 0;
-
-buttons.forEach(button =>{
-    button.classList.add("button")
-})
+buttonContainer.appendChild(btn1);
+buttonContainer.appendChild(btn2);
+buttonContainer.appendChild(btn3);
 btn1.textContent = "Rock";
 btn2.textContent = "Paper";
 btn3.textContent = "Scissors";
-main.appendChild(btn1);
-main.appendChild(btn2);
-main.appendChild(btn3);
+buttonContainer.classList.add('buttonContainer');
+resultContainer.classList.add('resultContainer');
+// resultContainer.appendChild()
+main.appendChild(resultContainer);
+main.appendChild(buttonContainer);
+
+
+
+buttons.forEach(button => {
+    button.classList.add("button")
+
+    button.addEventListener("click", (e) => {
+        switch (e.currentTarget) {
+            case btn1:
+                playRound(option1, getComputerChoice())
+                break;
+            case btn2:
+                playRound(option2, getComputerChoice())
+                break;
+            case btn3:
+                playRound(option3, getComputerChoice())
+                break;
+        }
+
+    })
+})
+
 
 
 function getComputerChoice() {
@@ -47,46 +77,54 @@ function getHumanChoice() {
 }
 
 function playRound(humanChoice, computerChoice) {
-    console.log("Human choice: ", humanChoice);
-    console.log("Computer choice: ", computerChoice);
-
-    if (humanChoice == computerChoice) { return "Draw! " }
+    if (humanChoice == computerChoice) { p2.textContent = "Draw! " }
     else if (humanChoice == option1 && computerChoice == option2) {
-        computerScore = computerScore + 1;
-        return "Computer Won! Paper Beats Rock";
+        computerScore += 1;
+        p3.textContent = "Computer Won! Paper Beats Rock";
     } else if (humanChoice == option2 && computerChoice == option1) {
-        humanScore = humanScore + 1;
-        return "Human Won! Paper Beats Rock";
+        humanScore += 1;
+        p3.textContent = "Human Won! Paper Beats Rock";
     } else if (humanChoice == option1 && computerChoice == option3) {
-        humanScore = humanScore + 1;
-        return "Human Won! Rock Beats Scissors";
+        humanScore += 1;
+        p3.textContent = "Human Won! Rock Beats Scissors";
     } else if (humanChoice == option3 && computerChoice == option1) {
-        computerScore = computerScore + 1;
-        return "Computer Won! Rock Beats Scissors";
+        computerScore += 1;
+        p3.textContent = "Computer Won! Rock Beats Scissors";
     } else if (humanChoice == option2 && computerChoice == option3) {
-        computerScore = computerScore + 1;
-        return "Computer Won! Scissor Beats Paper";
+        computerScore += 1;
+        p3.textContent = "Computer Won! Scissor Beats Paper";
     } else if (humanChoice == option3 && computerChoice == option2) {
-        humanScore = humanScore + 1;
-        return "Human Won! Scissor Beats Paper";
+        humanScore += 1;
+        p3.textContent = "Human Won! Scissor Beats Paper";
+    }
+
+    p1.textContent = `Human Score: ${humanScore} | Computer Score: ${computerScore}`
+    resultContainer.appendChild(p1);
+    p2.textContent = `Human choice:  ${humanChoice} | Computer choice:   ${computerChoice}`;
+    resultContainer.appendChild(p2);
+    resultContainer.appendChild(p3);
+    getWinner(humanScore, computerScore);
+
+
+}
+
+
+function playGame() {
+    getWinner(humanScore, computerScore);
+}
+
+function getWinner(HS, CS) {
+    if (HS == 5) {
+        resultContainer.removeChild(p1);
+        resultContainer.removeChild(p2);
+        p3.textContent = "Human Won The Game";
+    }
+    else if (CS == 5) {
+        resultContainer.removeChild(p1);
+        resultContainer.removeChild(p2);
     }
 }
 
-// function playGame() {
-//     for (let i = 1; i <= 5; i++) {
-//         const hc = getHumanChoice();
-//         const cc = getComputerChoice();
-//         console.log("\n Round ", i);
-//         console.log(playRound(hc, cc));
-//     }
-//     getWinner(humanScore, computerScore);
-// }
-function getWinner(humanScore, computerScore) {
-    console.log("Human Score: " + humanScore + " | " + "Computer Score: " + computerScore);
-    if (humanScore > computerScore) { console.log("Human Won The Game, Score:  " + humanScore) }
-    else if (computerScore > humanScore) { console.log("Computer Won The Game, Score: " + computerScore) }
-    else { console.log("Game Is A Draw!") }
-}
-// playGame();
+playGame();
 
 
