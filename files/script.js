@@ -6,13 +6,69 @@
 //write a function to get the human choice
 //  USE prompt and store it in a variable
 //write playRound function such that it gets the two parameter's from previous funcs, plays the game and shows the winner with a string value
-//   
+// for buttons, HTMl is better
+// I want to work with JS so im creating and editing them here
+
+const btn1 = document.createElement('button');
+const btn2 = document.createElement('button');
+const btn3 = document.createElement('button');
+const btn4 = document.createElement('button');
+const main = document.querySelector("#main");
+
+const buttons = [btn1, btn2, btn3, btn4];
+const buttonContainer = document.createElement("div");
+const resultContainer = document.createElement('div');
+const p1 = document.createElement('p');
+const p2 = document.createElement('p');
+const p3 = document.createElement('p');
+const p4 = document.createElement('p');
 
 let option1 = "rock";
 let option2 = "paper";
 let option3 = "scissors";
 let humanScore = 0;
 let computerScore = 0;
+buttonContainer.appendChild(btn1);
+buttonContainer.appendChild(btn2);
+buttonContainer.appendChild(btn3);
+btn1.textContent = "🪨";
+btn2.textContent = "📃";
+btn3.textContent = "✂️";
+btn4.textContent = "Restart";
+buttonContainer.classList.add('buttonContainer');
+resultContainer.classList.add('resultContainer');
+main.appendChild(resultContainer);
+main.appendChild(buttonContainer);
+
+
+
+buttons.forEach(button => {
+    button.classList.add("button")
+    button.addEventListener("click", (e) => {
+        switch (e.currentTarget) {
+            case btn1:
+                playRound(option1, getComputerChoice())
+                break;
+            case btn2:
+                playRound(option2, getComputerChoice())
+                break;
+            case btn3:
+                playRound(option3, getComputerChoice())
+                break;
+        }
+
+    })
+})
+btn4.addEventListener("click", (e) =>{
+    humanScore = 0;
+    computerScore = 0;
+    playGame();
+    main.removeChild(btn4);
+    main.appendChild(buttonContainer);
+    p3.textContent = "";
+})
+
+
 
 function getComputerChoice() {
     let number = (Math.floor(Math.random() * 10) + 3);
@@ -21,53 +77,59 @@ function getComputerChoice() {
     else if (number == 9 || number == 10 || number == 11 || number == 12) { return option3 }
 }
 
-function getHumanChoice() {
-    let choice = prompt("ROCK? PAPER? SCISSORS?");
-    choice = choice.toLowerCase();
-    if (choice == "rock") { return option1 }
-    else if (choice == "paper") { return option2 }
-    else if (choice == "scissors") { return option3 }
-}
-
 function playRound(humanChoice, computerChoice) {
-    console.log("Human choice: ", humanChoice);
-    console.log("Computer choice: ", computerChoice);
 
-    if (humanChoice == computerChoice) { return "Draw! " }
+
+
+    if (humanChoice == computerChoice) { p2.textContent = "Draw! " }
     else if (humanChoice == option1 && computerChoice == option2) {
-        computerScore = computerScore + 1;
-        return "Computer Won! Paper Beats Rock";
+        computerScore += 1;
+        p3.textContent = "Computer Won! Paper Beats Rock";
     } else if (humanChoice == option2 && computerChoice == option1) {
-        humanScore = humanScore + 1;
-        return "Human Won! Paper Beats Rock";
+        humanScore += 1;
+        p3.textContent = "Human Won! Paper Beats Rock";
     } else if (humanChoice == option1 && computerChoice == option3) {
-        humanScore = humanScore + 1;
-        return "Human Won! Rock Beats Scissors";
+        humanScore += 1;
+        p3.textContent = "Human Won! Rock Beats Scissors";
     } else if (humanChoice == option3 && computerChoice == option1) {
-        computerScore = computerScore + 1;
-        return "Computer Won! Rock Beats Scissors";
+        computerScore += 1;
+        p3.textContent = "Computer Won! Rock Beats Scissors";
     } else if (humanChoice == option2 && computerChoice == option3) {
-        computerScore = computerScore + 1;
-        return "Computer Won! Scissor Beats Paper";
+        computerScore += 1;
+        p3.textContent = "Computer Won! Scissor Beats Paper";
     } else if (humanChoice == option3 && computerChoice == option2) {
-        humanScore = humanScore + 1;
-        return "Human Won! Scissor Beats Paper";
+        humanScore += 1;
+        p3.textContent = "Human Won! Scissor Beats Paper";
     }
+
+    p1.textContent = `Human Score: ${humanScore} | Computer Score: ${computerScore}`
+    resultContainer.appendChild(p1);
+    p2.textContent = `Human choice:  ${humanChoice} | Computer choice:   ${computerChoice}`;
+    resultContainer.appendChild(p2);
+    resultContainer.appendChild(p3);
+    getWinner(humanScore, computerScore);
 }
 
 function playGame() {
-    for (let i = 1; i <= 5; i++) {
-        const hc = getHumanChoice();
-        const cc = getComputerChoice();
-        console.log("\n Round ", i);
-        console.log(playRound(hc, cc));
-    }
     getWinner(humanScore, computerScore);
 }
-function getWinner(humanScore, computerScore) {
-    console.log("Human Score: " + humanScore + " | " + "Computer Score: " + computerScore);
-    if (humanScore > computerScore) { console.log("Human Won The Game, Score:  " + humanScore) }
-    else if (computerScore > humanScore) { console.log("Computer Won The Game, Score: " + computerScore) }
-    else { console.log("Game Is A Draw!") }
+function getWinner(HS, CS) {
+    if (HS == 5) {
+        resultContainer.removeChild(p1);
+        resultContainer.removeChild(p2);
+        p3.textContent = "Human Won The Game"; 
+        main.removeChild(buttonContainer);
+        main.appendChild(btn4);
+    }
+    else if (CS == 5) {
+        resultContainer.removeChild(p1);
+        resultContainer.removeChild(p2);
+        p3.textContent = "Computer Won The Game";
+        main.removeChild(buttonContainer);
+        main.appendChild(btn4);
+    }
 }
+
 playGame();
+
+
